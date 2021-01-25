@@ -1,38 +1,33 @@
--- create database: Testing_System_Assignment_2
-DROP DATABASE IF EXISTS Testing_System_Assignment_2;
-CREATE DATABASE Testing_System_Assignment_2;
-USE Testing_System_Assignment_2;
--- update test 1
--- create table: Department
+DROP DATABASE IF EXISTS Testing_System;
+CREATE DATABASE Testing_System;
+USE Testing_System;
+
 DROP TABLE IF EXISTS Department;
 CREATE TABLE Department(
 DepartmentID			TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 DepartmentName			VARCHAR(30) UNIQUE KEY CHECK (LENGTH(DepartmentName)>=4)
 );
 
--- create table: `Position`
 DROP TABLE IF EXISTS `Position`;
 CREATE TABLE `Position` (
 PositionID				TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 PositionName			VARCHAR(30)
 );
 
--- create table: `Account`
 DROP TABLE IF EXISTS `Account`;
 CREATE TABLE `Account` (
 AccountID				SMALLINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 Email					VARCHAR(50) UNIQUE KEY NOT NULL CHECK (LENGTH(Email)>=10),
 Username				VARCHAR(50) UNIQUE KEY NOT NULL CHECK (LENGTH(Username)>=4),
 FullName				VARCHAR(50) NOT NULL,
-Gender					VARCHAR(10),
-DepartmentID			TINYINT UNSIGNED,
+Gender					VARCHAR(10), #updated: ENUM('M', 'F', 'U') > VARCHAR TO CREATE TRIGGER
+DepartmentID			TINYINT UNSIGNED, #updated: DEFAULT(1) > no DEFAULT TO CREATE TRIGGER
 PositionID				TINYINT UNSIGNED DEFAULT(1),
 CreateDate				DATE DEFAULT(NOW()),
 FOREIGN KEY(DepartmentID) REFERENCES Department(DepartmentID),
 FOREIGN KEY(PositionID)	REFERENCES `Position`(PositionID)
 );
 
--- create table: `Group`
 DROP TABLE IF EXISTS `Group`;
 CREATE TABLE `Group` (
 GroupID					TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -42,7 +37,6 @@ CreateDate				DATE DEFAULT(NOW()),
 FOREIGN KEY(CreatorID) REFERENCES `Account`(AccountID)
 );
 
--- create table: GroupAccount
 DROP TABLE IF EXISTS GroupAccount;
 CREATE TABLE GroupAccount (
 GroupID					TINYINT UNSIGNED NOT NULL,
@@ -52,21 +46,18 @@ FOREIGN KEY(GroupID) REFERENCES `Group`(GroupID),
 FOREIGN KEY(AccountID) REFERENCES `Account`(AccountID)
 );
 
--- create table: TypeQuestion
 DROP TABLE IF EXISTS TypeQuestion;
 CREATE TABLE TypeQuestion (
 TypeID					TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 TypeName				VARCHAR(50) NOT NULL
 );
 
--- create table: CategoryQuestion
 DROP TABLE IF EXISTS CategoryQuestion;
 CREATE TABLE CategoryQuestion (
 CategoryID				TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 CategoryName			VARCHAR(50) UNIQUE KEY NOT NULL
 );
 
--- create table: Question
 DROP TABLE IF EXISTS Question;
 CREATE TABLE Question (
 QuestionID				TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -80,7 +71,6 @@ FOREIGN KEY(TypeID)	REFERENCES TypeQuestion(TypeID),
 FOREIGN KEY(CreatorID) REFERENCES `Account`(AccountID)
 );
 
--- create table: Answer
 DROP TABLE IF EXISTS Answer;
 CREATE TABLE Answer (
 AnswerID				TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -90,7 +80,6 @@ isCorrect				ENUM ('True', 'False'),
 FOREIGN KEY(QuestionID) REFERENCES Question(QuestionID)
 );
 
--- create table: Exam
 DROP TABLE IF EXISTS Exam;
 CREATE TABLE Exam (
 ExamID					SMALLINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -104,7 +93,6 @@ FOREIGN KEY(CategoryID) REFERENCES CategoryQuestion(CategoryID),
 FOREIGN KEY(CreatorID) REFERENCES `Account`(AccountID)
 );
 
--- create table: ExamQuestion
 DROP TABLE IF EXISTS ExamQuestion;
 CREATE TABLE ExamQuestion (
 ExamID					SMALLINT UNSIGNED NOT NULL,
@@ -112,6 +100,8 @@ QuestionID				TINYINT UNSIGNED NOT NULL,
 FOREIGN KEY(ExamID) REFERENCES Exam(ExamID),
 FOREIGN KEY(QuestionID) REFERENCES Question(QuestionID)
 );
+
+-- INSERT DATA TO TABLES
 
 INSERT INTO Department	
 						(DepartmentName)

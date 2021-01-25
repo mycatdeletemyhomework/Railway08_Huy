@@ -1,4 +1,4 @@
-USE 		Testing_System_Assignment_2;
+USE 		Testing_System;
 
 -- Question 1: Thêm ít nhất 10 record vào mỗi table
 #sr pass
@@ -21,23 +21,20 @@ WHERE 		LENGTH(FullName) = (SELECT MAX(LENGTH(FullName)) FROM `account`)
 
 -- Question 4: Lấy ra thông tin account có full name dài nhất (2)
 -- This method only able to fetch 1 data from the top
+-- Should update this using subquerry
 SELECT *
 FROM 		`account`
 ORDER BY 	LENGTH(FullName) DESC LIMIT 1
 ;
 
 -- Question 5:  Lấy ra thông tin account có full name dài nhất và thuộc phòng ban có id = 3
+-- This method only able to fetch 1 data from the top
+-- Should update this using subquerry
 SELECT *
 FROM 		`account`
 GROUP BY 	DepartmentID
 HAVING 		DepartmentID = 3
 ORDER BY 	LENGTH(FullName) DESC LIMIT 1
-;
-
--- Question 5:  Lấy ra thông tin account có full name dài nhất và thuộc phòng ban có id = 3 (another answer)
-SELECT 		*, MAX(LENGTH(FullName))
-FROM 		`account`
-WHERE 		DepartmentID = 3
 ;
 
 -- Question 6: Lấy ra tên group đã tham gia trước ngày 20/12/2019
