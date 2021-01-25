@@ -1,16 +1,16 @@
 USE Testing_System;
 
+/*==========================================================================================================*/
 -- Question 1: Tạo view có chứa danh sách nhân viên thuộc phòng ban sale
 DROP VIEW IF EXISTS	employees_list_sale;
 CREATE VIEW employees_list_sale AS
 	SELECT		`account`.FullName, `account`.Username, department.DepartmentName
     FROM 		`account`, department
-    WHERE		department.DepartmentName = 'Sale'
+    WHERE		`account`.DepartmentID = department.DepartmentID AND department.DepartmentName = 'Sale'
 ;
-
-SELECT			employees_list_all.FullName, employees_list_all.Username
-FROM			employees_list_all
-;
+SELECT			employees_list_sale.FullName, employees_list_sale.Username
+FROM			employees_list_sale;
+/*==========================================================================================================*/
 
 -- Question 2: Tạo view có chứa thông tin các account tham gia vào nhiều group nhất
 DROP VIEW IF EXISTS employees_with_many_groups;
@@ -27,10 +27,10 @@ CREATE VIEW	employees_with_many_groups AS
 												GROUP BY	`account`.AccountID
 												)
 ;
-
 SELECT 			*
 FROM 			employees_with_many_groups
 ;
+/*==========================================================================================================*/
 
 -- Question 3: Tạo view có chứa câu hỏi có những content quá dài (content quá 300 từ được coi là quá dài) và xóa nó đi (delete views, delete record in view or delete from database?)
 DROP VIEW IF EXISTS too_long_question;
@@ -39,6 +39,9 @@ CREATE VIEW too_long_question AS
     FROM		question
     WHERE		LENGTH(Content) > 300
 ;
+SELECT 	*
+FROM	too_long_question;
+/*==========================================================================================================*/
 
 -- Question 4: Tạo view có chứa danh sách các phòng ban có nhiều nhân viên nhất
 DROP VIEW IF EXISTS department_with_many_employees;
@@ -54,10 +57,10 @@ CREATE VIEW	department_with_many_employees AS
 												GROUP BY	`account`.DepartmentID
 												)
 ;
-
 SELECT 			*
 FROM 			department_with_many_employees
 ;
+/*==========================================================================================================*/
 
 -- Question 5: Tạo view có chứa tất các các câu hỏi do user họ Nguyễn tạo (Based on the database, I will change 'user họ Nguyễn' to 'name: Tully Fermer')
 DROP VIEW IF EXISTS question_by_Tully;
@@ -66,7 +69,7 @@ CREATE VIEW question_by_Tully AS
     FROM		question, `account`
     WHERE		question.CreatorID = `account`.AccountID AND `account`.FullName = 'Tully Fermer'
 ;
-
 SELECT 			*
 FROM 			question_by_Tully
 ;
+/*==========================================================================================================*/

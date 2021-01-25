@@ -1,10 +1,10 @@
 USE Testing_System;
 SET GLOBAL log_bin_trust_function_creators = 1;
+#row_count: check number of record affected
 
-# -----------------------------------------------------------------------------------------------------------
+/*==========================================================================================================*/
 -- Question 1: Tạo store để người dùng nhập vào tên phòng ban và in ra tất cả các account thuộc phòng ban đó
 DROP PROCEDURE IF EXISTS get_account_from_department;
-
 DELIMITER $$
 CREATE PROCEDURE get_account_from_department (IN department_name VARCHAR(50))
 	BEGIN
@@ -17,49 +17,43 @@ DELIMITER ;
 
 CALL	get_account_from_department('Sale');
 
-
-# -----------------------------------------------------------------------------------------------------------
+/*==========================================================================================================*/
 -- Question 2: Tạo store để in ra số lượng account trong mỗi group
+-- This SP / Function will export the number of account in selected group, not all groups
+-- Will update SP to export the account number in all groups later
+
 -- USING STORED PROCEDURE --
 DROP PROCEDURE IF EXISTS number_of_accounts;
-
 DELIMITER $$
-CREATE PROCEDURE number_of_accounts(IN group_number TINYINT, OUT o_number_of_accounts TINYINT)
+CREATE PROCEDURE number_of_accounts(IN group_number TINYINT)
 	BEGIN
-		SELECT			COUNT(`account`.AccountID) INTO o_number_of_accounts
+		SELECT			COUNT(`account`.AccountID)
         FROM			`account`, groupaccount
         WHERE			`account`.AccountID = groupaccount.AccountID AND groupaccount.GroupID = group_number;
 	END $$
 DELIMITER ;
 
-SET @v_number_of_accounts = '';
-CALL number_of_accounts('1', @v_number_of_accounts);
-SELECT @v_number_of_accounts;
+CALL number_of_accounts(1);
 
 -- USING FUNCTION --
 DROP FUNCTION IF EXISTS number_of_accountsf;
-
 DELIMITER $$
 CREATE FUNCTION number_of_accountsf (group_numberf TINYINT) RETURNS TINYINT
 	BEGIN
 		DECLARE	o_number_of_accountsf TINYINT;
-        
 		SELECT	COUNT(`account`.AccountID) INTO o_number_of_accountsf
 		FROM	`account`, groupaccount
         WHERE	`account`.AccountID = groupaccount.AccountID AND groupaccount.GroupID = group_numberf;
-        
         RETURN	o_number_of_accountsf;
 	END $$
 DELIMITER ;
 
 SELECT	number_of_accountsf(1);
 
-# -----------------------------------------------------------------------------------------------------------
+/*==========================================================================================================*/
 -- Question 3: Tạo store để thống kê mỗi type question có bao nhiêu question được tạo trong tháng hiện tại
 -- USING FUNCTION --
-
 DROP FUNCTION IF EXISTS number_of_questions;
-
 DELIMITER $$
 CREATE FUNCTION number_of_questions (type_name VARCHAR(50)) RETURNS TINYINT
 BEGIN
@@ -77,21 +71,20 @@ DELIMITER ;
 
 SELECT		number_of_questions('Constant Sum Question');
 
-# -----------------------------------------------------------------------------------------------------------
+/*==========================================================================================================*/
+/* HIỆM TẠI QUESTION 4 - 5 ĐANG SAI, SẼ CẬP NHẬT SAU
 -- Question 4: Tạo store để trả ra id của type question có nhiều câu hỏi nhất
 
 -- Trong trường hợp type có >= 2 type question có nhiều câu hỏi nhất > function không thể cho ra được 2 kết quả
 -- > tạo function kiếm số count của question có nhiều câu hỏi nhất
--- > dùng function này trong các thuật toán tiếp theo
+-- > dùng call function này trong các thuật toán tiếp theo
 
 # FUNCTION TÌM SỐ COUNT MAX CỦA QUESTION TYPE
 DROP FUNCTION IF EXISTS most_questioned_number;
-
 DELIMITER $$
 CREATE FUNCTION most_questioned_number () RETURNS TINYINT
 BEGIN
-	DECLARE		o_most_questioned_number TINYINT;
-    
+	DECLARE 	o_most_questioned_number TINYINT; # ĐANG Đ HIỂU DECLARE THÌ SAI SYNTAX CHỖ NÀO?
 	SELECT		typequestion.TypeName, COUNT(question.QuestionID) -- INTO o_most_questioned_number
 	FROM		question, typequestion
 	WHERE		question.TypeID = typequestion.TypeID
@@ -99,7 +92,7 @@ BEGIN
     HAVING		COUNT(question.QuestionID) >= ALL (	SELECT		COUNT(question.QuestionID)
 													FROM		question, typequestion
                                                     WHERE		question.TypeID = typequestion.TypeID
-                                                    GROUP BY	typequestion.TypeID );
+                                                    GROUP BY	typequestion.TypeID);
     RETURN	o_most_questioned_number;
 END $$
 DELIMITER ;
@@ -137,8 +130,9 @@ FROM			typequestion, question
 WHERE			typequestion.TypeID = question.TypeID
 GROUP BY		typequestion.TypeID
 HAVING			COUNT(question.QuestionID) =  most_questioned_number ()
+*/
 
-# -----------------------------------------------------------------------------------------------------------
+/*==========================================================================================================*/
 -- Question 6:	Viết 1 store cho phép người dùng nhập vào 1 chuỗi và trả về group có tên
 -- 				chứa chuỗi của người dùng nhập vào hoặc trả về user có username chứa
 -- 				chuỗi của người dùng nhập vào
@@ -162,10 +156,11 @@ BEGIN
     ;
 END $$
 DELIMITER ;
-
+#test: call tìm 'as' kết quả trả về cả những account lẫn group có chứa 'as'
 CALL string_finder ('as');
 SELECT * FROM string_list;
-    
+
+/*==========================================================================================================*/   
 -- Question 7: Viết 1 store cho phép người dùng nhập vào thông tin fullName, email và trong store sẽ tự động gán:
 -- username sẽ giống email nhưng bỏ phần @..mail đi
 -- positionID: sẽ có default là developer
@@ -173,7 +168,6 @@ SELECT * FROM string_list;
 -- Sau đó in ra kết quả tạo thành công
 
 DROP PROCEDURE IF EXISTS insert_new_account;
-
 DELIMITER $$
 CREATE PROCEDURE insert_new_account (IN full_name VARCHAR(50), IN email_address VARCHAR(50))
 BEGIN
@@ -196,9 +190,10 @@ BEGIN
     ;
 	END $$
 DELIMITER ;
-# ROW COUNT - TÌM SỐ LƯỢNG BẢN GHI BỊ ẢNH HƯỞNG BỞI CÁC LỆNH INSERT UPDATE DELETE 
-CALL insert_new_account ('Assigment 6-7', 'assignment67@gmail.com');
+#test:
+CALL insert_new_account ('Assigment 6-7', 'assignment6_7@gmail.com');
 
+/*==========================================================================================================*/ 
 -- Question 8: Viết 1 store cho phép người dùng nhập vào Essay hoặc Multiple-Choice
 -- để thống kê câu hỏi essay hoặc multiple-choice nào có content dài nhất
 
@@ -210,18 +205,22 @@ BEGIN
     FROM		question, typequestion
     WHERE		question.TypeID = typequestion.TypeID 
 				AND typequestion.TypeName = question_type
-    ORDER BY	LENGTH(question.Content) DESC LIMIT 1
-	;
+				AND LENGTH(question.Content) >= ALL
+												(SELECT	LENGTH(question.Content)
+												FROM	question
+                                                WHERE	question.TypeID = typequestion.TypeID 
+												AND 	typequestion.TypeName = question_type)
+                                                ;
     END $$
 DELIMITER ;
-
+#TEST
 CALL longest_content('Multiple Choice Question');
-
 /* LENGTH(content) = (SELECT MAX(LENGTH(content)) FROM question WHERE ... */
 
+/*==========================================================================================================*/ 
 -- Question 9: Viết 1 store cho phép người dùng xóa exam dựa vào ID
-DROP PROCEDURE IF EXISTS delete_exams;
-DELIMITER $$
 
+/*==========================================================================================================*/ 
 -- Question 10: Xóa trong 2 bảng, xóa trong từng bảng, k dùng on delete cascade
 -- dùng interval
+
