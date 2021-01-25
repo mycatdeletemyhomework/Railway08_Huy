@@ -2,7 +2,7 @@
 DROP DATABASE IF EXISTS Testing_System_Assignment_2;
 CREATE DATABASE Testing_System_Assignment_2;
 USE Testing_System_Assignment_2;
-
+-- update test 1
 -- create table: Department
 DROP TABLE IF EXISTS Department;
 CREATE TABLE Department(
