@@ -18,7 +18,7 @@ CREATE TABLE Location
 (
 location_id			TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 street_address		VARCHAR(50) UNIQUE KEY,
-postal_code			INT UNSIGNED UNIQUE KEY,
+postal_code			VARCHAR(50),
 country_id			TINYINT UNSIGNED,
 FOREIGN KEY(country_id)	REFERENCES Country(country_id)
 );
@@ -67,6 +67,7 @@ FROM	Country, Location, Employee
 WHERE	Country.country_id = Location.country_id
 		AND	Location.location_id = Employee.location_id
         AND	Employee.email = 'nn03@gmail.com'
+;
         
 #Thống kê mỗi country, mỗi location có bao nhiêu employee đang làm việc
 SELECT		Country.country_name AS Country, Location.street_address AS Address, COUNT(Employee.employee_id) AS Number_of_employees
@@ -74,6 +75,7 @@ FROM		Country, Location, Employee
 WHERE		Country.country_id = Location.country_id
 			AND	Location.location_id = Employee.location_id
 GROUP BY	Country.country_name, Location.street_address
+;
 
 
 #Final assignment - Task 3
