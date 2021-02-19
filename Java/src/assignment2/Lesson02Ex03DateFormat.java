@@ -1,4 +1,6 @@
-package testing_system;
+package assignment2;
+
+import assignment1.*;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,7 +26,7 @@ public static void main(String[] args) {
 
 //	Question 2:
 //	In ra thông tin: Exam đã tạo ngày nào theo định dạng
-//	Năm – tháng – ngày – giờ – phút – giây
+//	Năm – tháng – ngày – gi�? – phút – giây
 	String pattern = "yyyy-dd-MM-HH-mm-ss";
 	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 	String examCreateDate2 = simpleDateFormat.format(exam1.createDate);

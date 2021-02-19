@@ -1,4 +1,6 @@
-package testing_system;
+package assignment2;
+
+import assignment1.*;
 
 import java.util.Date;
 import java.util.Locale;
@@ -83,14 +85,14 @@ public static void main(String[] args) {
 	System.out.printf("%n%.4f", c);
 	
 //	Question 4:	
-//	Khai báo Họ và tên của 1 học sinh và in ra họ và tên học sinh đó theo định dạng như sau:
-//	Họ và tên: "Nguyễn Văn A" thì sẽ in ra trên console như sau:
+//	Khai báo H�? và tên của 1 h�?c sinh và in ra h�? và tên h�?c sinh đó theo định dạng như sau:
+//	H�? và tên: "Nguyễn Văn A" thì sẽ in ra trên console như sau:
 //	Tên tôi là "Nguyễn Văn A" và tôi đang độc thân.
 	String d = "Nguyễn Văn A";
 	System.out.printf("%nTên tôi là %s và tôi đang độc thân.", d);
 	
 //	Question 5:
-//	Lấy thời gian bây giờ và in ra theo định dạng sau:
+//	Lấy th�?i gian bây gi�? và in ra theo định dạng sau:
 //	24/04/2020 11h:16p:20s 
 	Date date = new Date();
 	System.out.printf("%n%1$td/%1$tm/%1$tY %1$tHh:%1$tMp:%1$tSs", date);

@@ -1,4 +1,4 @@
-package testing_system;
+package assignment2;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -21,15 +21,15 @@ public static void main(String[] args) {
 	int c = random.nextInt(ten.length);
 	System.out.println(ten[c]);
 	
-//	Question 4: Lấy ngẫu nhiên 1 ngày trong khoảng thời gian 24-07-1995 tới ngày 20-12-1995
-	// về cơ bản chỉ là đổi giá trị ngày thành số int (EpochDay) rồi random
+//	Question 4: Lấy ngẫu nhiên 1 ngày trong khoảng th�?i gian 24-07-1995 tới ngày 20-12-1995
+	// v�? cơ bản chỉ là đổi giá trị ngày thành số int (EpochDay) rồi random
 	int minDay = (int) LocalDate.of(1995, 7, 24).toEpochDay();
 	int maxDay = (int) LocalDate.of(1995, 12, 20).toEpochDay();
 	long randomInt = minDay + random.nextInt(maxDay - minDay);
 	LocalDate randomDay = LocalDate.ofEpochDay(randomInt);
 	System.out.println(randomDay);
 
-//	Question 5: Lấy ngẫu nhiên 1 ngày trong khoảng thời gian 1 năm trở lại đây
+//	Question 5: Lấy ngẫu nhiên 1 ngày trong khoảng th�?i gian 1 năm trở lại đây
 	Date toDay = new Date();
 	int toDayInt = (int) LocalDate.now().toEpochDay();
 	long randomInt2 = toDayInt - random.nextInt(365);

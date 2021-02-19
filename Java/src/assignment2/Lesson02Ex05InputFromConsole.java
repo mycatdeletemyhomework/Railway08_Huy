@@ -1,4 +1,4 @@
-package testing_system;
+package assignment2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +9,11 @@ public class Lesson02Ex05InputFromConsole {
 		
 	Scanner scanner = new Scanner(System.in);
 	
-//	Question 1: Viết lệnh cho phép người dùng nhập 3 số nguyên vào chương trình	
+//	Question 1: Viết lệnh cho phép ngư�?i dùng nhập 3 số nguyên vào chương trình	
 	int[] a = new int[3]; //to successfully initialize array, we need to have the size of the array
 	for (int i = 0; i < 3; i++)
 	{
-		System.out.printf("%nMời nhập số thứ %d: ", i+1);
+		System.out.printf("%nM�?i nhập số thứ %d: ", i+1);
 		a[i] = scanner.nextInt();
 	}
 	System.out.printf("%nCác số đã nhập là: ");
@@ -22,20 +22,20 @@ public class Lesson02Ex05InputFromConsole {
 		System.out.printf(" %d ", a[i]);
 	}
 	
-//	Question 1: Viết lệnh cho phép người dùng nhập 3 số nguyên vào chương trình	(using list)
+//	Question 1: Viết lệnh cho phép ngư�?i dùng nhập 3 số nguyên vào chương trình	(using list)
 	List<Integer> b = new ArrayList<Integer>(); // with out the size, we can initialize a list and then use list.add
 	for (int i = 0; i < 3; i++)
 	{
-		System.out.printf("%nMời nhập số thứ %d: ", i+1);
+		System.out.printf("%nM�?i nhập số thứ %d: ", i+1);
 		b.add(scanner.nextInt());
 	}	
 	System.out.println("Các số đã nhập là" + b.toString());
 	
-//	Question 2: Viết lệnh cho phép người dùng nhập 2 số thực vào chương trình
+//	Question 2: Viết lệnh cho phép ngư�?i dùng nhập 2 số thực vào chương trình
 	float[] c = new float[2];
 	for (int i = 0; i < 2; i++)
 	{
-		System.out.printf("%nMời nhập số thứ %d: ", i+1);
+		System.out.printf("%nM�?i nhập số thứ %d: ", i+1);
 		c[i] = scanner.nextFloat();
 	}
 	System.out.printf("%nCác số đã nhập là: ");
@@ -45,35 +45,35 @@ public class Lesson02Ex05InputFromConsole {
 	}
 	
 	
-//	Question 4: Viết lệnh cho phép người dùng nhập họ và tên
-	System.out.printf("%nMời nhập họ: ");
+//	Question 4: Viết lệnh cho phép ngư�?i dùng nhập h�? và tên
+	System.out.printf("%nM�?i nhập h�?: ");
 	String ho = scanner.next(); // scanner.nextLine won't do it
-	System.out.printf("%nMời nhập tên: ");
+	System.out.printf("%nM�?i nhập tên: ");
 	String ten = scanner.next();
-	System.out.printf("Họ và tên là: %s %s", ho, ten);
+	System.out.printf("H�? và tên là: %s %s", ho, ten);
 //	next() can read the input only till the space. It can't read two words separated by space. 
 //	Also, next() places the cursor in the same line after reading the input.
 //	nextLine() reads input including space between the words (that is, it reads till the end of line).
 //	Once the input is read, nextLine() positions the cursor in the next line.
 	
 //	Question 5: 	
-//	Viết lệnh cho phép người dùng tạo account (viết thành method)
-//	Đối với property Position, Người dùng nhập vào 1 2 3 4 5 và vào
+//	Viết lệnh cho phép ngư�?i dùng tạo account (viết thành method)
+//	�?ối với property Position, Ngư�?i dùng nhập vào 1 2 3 4 5 và vào
 //	chương trình sẽ chuyển thành Position.Dev, Position.Test,
 //	Position.ScrumMaster, Position.PM
 	createAccount(); // see method createAccount below
 	
-//	Question 6: Viết lệnh cho phép người dùng tạo department (viết thành method)
+//	Question 6: Viết lệnh cho phép ngư�?i dùng tạo department (viết thành method)
 	createDepartment(); // see method createDepartment below
 	
 //	Question 7: Nhập số chẵn từ console
 	while (true) // vòng lặp liên tục cho đến khi break > tức là nhập đã đúng
 	{
-	System.out.printf("%nMời nhập số: ");
+	System.out.printf("%nM�?i nhập số: ");
 	int d = scanner.nextInt();
 	if (d % 2 == 1)
 		{
-		System.out.printf("%nNhập sai, mời nhập lại!");
+		System.out.printf("%nNhập sai, m�?i nhập lại!");
 		}
 	else
 		{
@@ -84,53 +84,54 @@ public class Lesson02Ex05InputFromConsole {
 	
 //	Question 8: Viết chương trình thực hiện theo flow sau:
 //	Bước 1:
-//		Chương trình in ra text "mời bạn nhập vào chức năng muốn sử dụng"
+//		Chương trình in ra text "m�?i bạn nhập vào chức năng muốn sử dụng"
 //	Bước 2:
-//		Nếu người dùng nhập vào 1 thì sẽ thực hiện tạo account
-//		Nếu người dùng nhập vào 2 thì sẽ thực hiện chức năng tạo department
-//		Nếu người dùng nhập vào số khác thì in ra text "Mời bạn nhập lại" và quay trở lại bước 1	
+//		Nếu ngư�?i dùng nhập vào 1 thì sẽ thực hiện tạo account
+//		Nếu ngư�?i dùng nhập vào 2 thì sẽ thực hiện chức năng tạo department
+//		Nếu ngư�?i dùng nhập vào số khác thì in ra text "M�?i bạn nhập lại" và quay trở lại bước 1	
 	while (true) // vòng lặp liên tục cho đến khi break > tức là nhập đã đúng
 	{
-		System.out.printf("%nMời bạn nhập vào chức năng muốn sử dụng: ");
+		System.out.printf("%nM�?i bạn nhập vào chức năng muốn sử dụng: ");
 		int i = scanner.nextInt();
 		
 		switch (i) {
 		case 1:
 			createAccount();
-			return; // why is break not wotking in this case???
+			break;
 		case 2:
 			createDepartment();
-			return;
+			break;
 		default:
-			System.out.printf("%nMời nhập lại!");
+			System.out.printf("%nM�?i nhập lại!");
+			break;
 		}
 	}
 	
-//	Question 9: Viết method cho phép người dùng thêm group vào account theo flow sau:
-//	Bước 1: In ra tên các usernames của user cho người dùng xem
-//	Bước 2: Yêu cầu người dùng nhập vào username của account
-//	Bước 3:	In ra tên các group cho người dùng xem
-//	Bước 4:	Yêu cầu người dùng nhập vào tên của group
-//	Bước 5:	Dựa vào username và tên của group người dùng vừa chọn, hãy thêm account vào group đó
+//	Question 9: Viết method cho phép ngư�?i dùng thêm group vào account theo flow sau:
+//	Bước 1: In ra tên các usernames của user cho ngư�?i dùng xem
+//	Bước 2: Yêu cầu ngư�?i dùng nhập vào username của account
+//	Bước 3:	In ra tên các group cho ngư�?i dùng xem
+//	Bước 4:	Yêu cầu ngư�?i dùng nhập vào tên của group
+//	Bước 5:	Dựa vào username và tên của group ngư�?i dùng vừa ch�?n, hãy thêm account vào group đó
 	
 //	Question 10:
 //	Bổ sung thêm vào bước 2 của Question 8 như sau:
-//		Nếu người dùng nhập vào 3 thì sẽ thực hiện chức năng thêm group vào account
+//		Nếu ngư�?i dùng nhập vào 3 thì sẽ thực hiện chức năng thêm group vào account
 //	Bổ sung thêm Bước 3 của Question 8 như sau:
-//		Sau khi người dùng thực hiện xong chức năng ở bước 2 thì in ra dòng
-//		text để hỏi người dùng "Bạn có muốn thực hiện chức năng khác
+//		Sau khi ngư�?i dùng thực hiện xong chức năng ở bước 2 thì in ra dòng
+//		text để h�?i ngư�?i dùng "Bạn có muốn thực hiện chức năng khác
 //		không?". 
-//		Nếu người dùng chọn "Có" thì quay lại bước 1, nếu người
-//		dùng chọn "Không" thì kết thúc chương trình (sử dụng lệnh return để
+//		Nếu ngư�?i dùng ch�?n "Có" thì quay lại bước 1, nếu ngư�?i
+//		dùng ch�?n "Không" thì kết thúc chương trình (sử dụng lệnh return để
 //		kết thúc chương trình)
 	
 //	Question 11:
 //	Bổ sung thêm vào bước 2 của Question 8 như sau:
-//	Nếu người dùng nhập vào 4 thì sẽ thực hiện chức năng thêm account vào 1 nhóm ngẫu nhiên, chức năng sẽ được cài đặt như sau:
-//		Bước 1:	In ra tên các usernames của user cho người dùng xem
-//		Bước 2:	Yêu cầu người dùng nhập vào username của account
-//		Bước 3:	Sau đó chương trình sẽ chọn ngẫu nhiên 1 group
-//		Bước 4:	Thêm account vào group chương trình vừa chọn ngẫu nhiên
+//	Nếu ngư�?i dùng nhập vào 4 thì sẽ thực hiện chức năng thêm account vào 1 nhóm ngẫu nhiên, chức năng sẽ được cài đặt như sau:
+//		Bước 1:	In ra tên các usernames của user cho ngư�?i dùng xem
+//		Bước 2:	Yêu cầu ngư�?i dùng nhập vào username của account
+//		Bước 3:	Sau đó chương trình sẽ ch�?n ngẫu nhiên 1 group
+//		Bước 4:	Thêm account vào group chương trình vừa ch�?n ngẫu nhiên
 
 
 }	

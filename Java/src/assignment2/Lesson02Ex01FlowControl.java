@@ -1,4 +1,6 @@
-package testing_system;
+package assignment2;
+
+import assignment1.*;
 
 public class Lesson02Ex01FlowControl {
 public static void main(String[] args) {
@@ -71,12 +73,12 @@ public static void main(String[] args) {
 //	Question 2:
 //	Kiểm tra account thứ 2. Nếu không có group thì sẽ in ra text "Nhân viên này chưa có group"
 //	Nếu có mặt trong 1 hoặc 2 group thì sẽ in ra text "Group của nhân viên này là Java Fresher, C# Fresher"
-//	Nếu có mặt trong 3 Group thì sẽ in ra text "Nhân viên này là người quan trọng, tham gia nhiều group"
-//	Nếu có mặt trong 4 group trở lên thì sẽ in ra text "Nhân viên này là người hóng chuyện, tham gia tất cả các group"
+//	Nếu có mặt trong 3 Group thì sẽ in ra text "Nhân viên này là ngư�?i quan tr�?ng, tham gia nhi�?u group"
+//	Nếu có mặt trong 4 group trở lên thì sẽ in ra text "Nhân viên này là ngư�?i hóng chuyện, tham gia tất cả các group"
 	if (account2.groups.length == 0) {System.out.println("Nhân viên này chưa có group");}
 	else if (account2.groups.length == 1 || account2.groups.length == 2) {System.out.println("Nhân viên này chưa có group");}
-	else if (account2.groups.length == 3) {System.out.println("Nhân viên này là người quan trọng, tham gia nhiều group");}
-	else {System.out.println("Nhân viên này là người hóng chuyện, tham gia tất cả các group");}
+	else if (account2.groups.length == 3) {System.out.println("Nhân viên này là ngư�?i quan tr�?ng, tham gia nhi�?u group");}
+	else {System.out.println("Nhân viên này là ngư�?i hóng chuyện, tham gia tất cả các group");}
 // ủa đhs sai?
 	
 //	Question 3:	
@@ -87,16 +89,16 @@ public static void main(String[] args) {
 //	Question 4:
 //	Sử dụng toán tử ternary để làm yêu cầu sau:
 //	Kiểm tra Position của account thứ 1
-//	Nếu Position = Dev thì in ra text "Đây là Developer"
-//	Nếu không phải thì in ra text "Người này không phải là Developer"
-	System.out.println(account1.position.name == "Dev" ? "Đây là Developer" : "Người này không phải là Developer");
+//	Nếu Position = Dev thì in ra text "�?ây là Developer"
+//	Nếu không phải thì in ra text "Ngư�?i này không phải là Developer"
+	System.out.println(account1.position.name == "Dev" ? "�?ây là Developer" : "Ngư�?i này không phải là Developer");
 	
 // 	Question 5:
 //	Lấy ra số lượng account trong nhóm thứ 1 và in ra theo format sau:
 //	Nếu số lượng account = 1 thì in ra "Nhóm có một thành viên"
 //	Nếu số lượng account = 2 thì in ra "Nhóm có hai thành viên"
 //	Nếu số lượng account = 3 thì in ra "Nhóm có ba thành viên"
-//	Còn lại in ra "Nhóm có nhiều thành viên"
+//	Còn lại in ra "Nhóm có nhi�?u thành viên"
 	Account[] membersOfGroup1 = {account1};
 	group1.members = membersOfGroup1;
 	
@@ -114,7 +116,7 @@ public static void main(String[] args) {
 			System.out.println("Nhóm có ba thành viên");
 			break;
 		default:
-			System.out.println("Nhóm nhiều ba thành viên");
+			System.out.println("Nhóm nhi�?u ba thành viên");
 			break;
 		}
 //	Question 6:
@@ -124,21 +126,21 @@ public static void main(String[] args) {
 //	Sử dụng switch case để làm lại Question 4
 			switch(account1.position.name) {
 			case "Dev":
-				System.out.println("Người này là developer");
+				System.out.println("Ngư�?i này là developer");
 				break;
 			default:
-				System.out.println("Người này không phải developer");
+				System.out.println("Ngư�?i này không phải developer");
 				break;
 			}
 			
 //	Question 8:
-//	In ra thông tin các account bao gồm: Email, FullName và tên phòng ban của họ
+//	In ra thông tin các account bao gồm: Email, FullName và tên phòng ban của h�?
 	Account[] accounts = {account1, account2, account3};
 	for (Account account  : accounts) // account chỉ là biến để tạo vòng lặp (vd như i ở các thí dụ khác) không cần là biến đã được declare ở trên
 	{
-		System.out.printf("%n	+Email của người có id = %d là: %s", account.id, account.email);
-		System.out.printf("%n	 Tên đầy đủ của người có id = %d là: %s", account.id, account.fullName);
-		System.out.printf("%n	 Department của người có id = %d là: %s", account.id, account.department.name);
+		System.out.printf("%n	+Email của ngư�?i có id = %d là: %s", account.id, account.email);
+		System.out.printf("%n	 Tên đầy đủ của ngư�?i có id = %d là: %s", account.id, account.fullName);
+		System.out.printf("%n	 Department của ngư�?i có id = %d là: %s", account.id, account.department.name);
 	}
 	
 //	Question 9:
@@ -151,7 +153,7 @@ public static void main(String[] args) {
 	
 //	Question 10:
 //	In ra thông tin các account bao gồm: Email, FullName và tên phòng ban của
-//	họ theo định dạng như sau:
+//	h�? theo định dạng như sau:
 //	Thông tin account thứ 1 là:
 //	Email: NguyenVanA@gmail.com
 //	Full name: Nguyễn Văn A
@@ -210,7 +212,7 @@ public static void main(String[] args) {
 		System.out.printf("%n	Phòng ban: %s", accounts[i].department.name);
 	}
 	
-//	Question 15: In ra các số chẵn nhỏ hơn hoặc bằng 20
+//	Question 15: In ra các số chẵn nh�? hơn hoặc bằng 20
 	System.out.println("\nQ15: ");
 	for (int i = 0; i <= 20; i++)
 		if (i % 2 == 0)
