@@ -1,13 +1,20 @@
 package assignment3;
 
 import assignment1.Account;
+import assignment1.Department;
+
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Lesson03 {
 public static void main(String[] args) {
-question46();
+question415();
 }
 		
 //==========================================================================================
@@ -121,34 +128,22 @@ public static void question41() {
 //	Nhập một xâu kí tự, đếm số lượng các từ trong xâu kí tự đó (các từ có thể cách nhau bằng nhiều khoảng trắng )
 	Scanner scanner = new Scanner(System.in);
 	System.out.println("Please enter the string here: ");
-	String a = scanner.nextLine();
-	System.out.println("The word count of this line is: " + wordCount(a));
-	System.out.println("Disclamer: If user pressed double-space between letters, the result will be wrong!");
+	String s = scanner.nextLine();
+	String sRefined = wordsRefinement(s);
+	System.out.println("The word count of this line is: " + wordCounts(sRefined));
 }
-public static int wordCount(String s) {
-	int count = 0;
+public static String wordsRefinement(String s) {
+	//	remove the spaces at the beginning and the end of the string
+	s = s.trim();
+		
+	//	remove multiple spacing - for more information check trim() regex
+	s = s.trim().replaceAll(" +", " ");
 	
-	// first, we need to remove all of the spacing at the start and the end of the string, only stop when all of them removed
-	while (true) {
-	if (s.charAt(0) == ' ') { 
-		s = s.substring(1); // eliminate the space at the beginning string
-	}
-	if (s.charAt(s.length()-1) == ' ') { 
-		s = s.substring(0, s.length() - 1); // eliminate the space at the beginning and the end of string
-	}
-	if (s.charAt(0) != ' ' && s.charAt(s.length()-1) != ' ')
-		break;
-	}
-	
-	// then we will count number of the worlds when meet a space
-		for (int i = 0; i < s.length(); i++) {
-			if (s.charAt(i) == ' ') { //charAt(i) == " " will show an error
-				count++; // count the number of space
-			}
-		}
-	
-	count += 1; // number of letter = number of space +1
-	return count;
+	return s;
+}
+public static int wordCounts (String s) {
+	String[] split = s.split(" ");
+	return split.length;
 }
 //==========================================================================================
 public static void question42() {
@@ -202,7 +197,7 @@ public static void question45() {
 	System.out.println("Full name of the user is: " + fullName);
 }
 //==========================================================================================
-public static void question46() {
+public static void question467() {
 //	Question 6:
 //	Viết chương trình yêu cầu người dùng nhập vào họ và tên đầy đủ và sau đó hệ thống sẽ tách ra họ, tên , tên đệm
 //	VD:	Người dùng nhập vào "Nguyễn Văn Nam"
@@ -215,63 +210,36 @@ public static void question46() {
 //	Viết chương trình yêu cầu người dùng nhập vào họ và tên đầy đủ và chuẩn hóa họ và tên của họ như sau:
 //	a) Xóa dấu cách ở đầu và cuối và giữa của chuỗi người dùng nhập	vào
 //		VD: Nếu người dùng nhập vào " nguyễn văn nam " thì sẽ chuẩn hóa thành "nguyễn văn nam" 
-//	> question41() and question46()
-	
 //	b) Viết hoa chữ cái mỗi từ của người dùng
 //		VD: Nếu người dùng nhập vào " nguyễn văn nam " thì sẽ chuẩn hóa thành "Nguyễn Văn Nam"
 //	> question43()
-//	Disclamer: this function won't work if user's middle name is more than 2-letter long!
 	
 	Scanner scanner = new Scanner(System.in);
 	System.out.print("Please enter user full name here: ");
 	String s = scanner.nextLine();
 	
-	// first, we need to remove all of the spacing at the start and the end of the string, only stop when all of them removed
-	while (true) {
-	if (s.charAt(0) == ' ') { 
-		s = s.substring(1); // eliminate the space at the beginning string
-	}
-	if (s.charAt(s.length()-1) == ' ') { 
-		s = s.substring(0, s.length() - 1); // eliminate the space at the beginning and the end of string
-	}
-	if (s.charAt(0) != ' ' && s.charAt(s.length()-1) != ' ')
-		break;
-	}
-		
-	// at here, we will cut the String full name from the beginning: first letter is the family name
-	// following by a cut from the back: last letter is the first name
-	// lastly, the middle part (which have been left is the middle name)
+	//	first, we need to refine the input
+	s = wordsRefinement(s);
+	
+	//	then split the refined string to individual words
+	String[] split = s.split(" ");
 
-	String s1 = "";
-	String middleName = "";
-	String familyName = "";
-	String firstName = "";
-	
-	// cut out family name
-	for (int i = 0; i < s.length(); i++) {
-		if (s.charAt(i) == ' ') {
-			familyName = s.substring(0, i);
-			s1 = s.substring(i + 1);
-			break;
-		}
+	//	upper case first letters of each letters
+	for (int i = 0; i < split.length; i++) {
+		split[i] = split[i].substring(0, 1).toUpperCase() + split[i].substring(1);
 	}
 	
-	// separate first name and middle name
-	for (int i1 = s1.length() - 1; i1 >= 0; i1--) { // charAt indexing start with 0 but length() will count from 1
-		if (s1.charAt(i1) == ' ') {
-			firstName = s1.substring(i1+1);
-			middleName = s1.substring(0, i1);
-			break;
+	//	the last string of split array is first name, the first string is family name	
+	System.out.println("Family name: " + split[0]);
+	if (split.length <= 2) {
+		System.out.print("This person doesn't have middle name!");
+	} else {
+		System.out.print("Middle name: ");
+		for (int i = 1; i < split.length - 1; i++) {
+			System.out.print(split[i] + " ");
 		}
 	}
-	
-	familyName = familyName.substring(0,1).toUpperCase() + familyName.substring(1).toLowerCase();
-	middleName = middleName.substring(0,1).toUpperCase() + middleName.substring(1).toLowerCase();
-	firstName = firstName.substring(0,1).toUpperCase() + firstName.substring(1).toLowerCase();
-	
-	System.out.println("Family name: " + familyName);
-	System.out.println("Midlle name: " + middleName);
-	System.out.println("First name: " + firstName);
+	System.out.println("\nFirst name: " + split[split.length -1]);
 }
 //==========================================================================================
 public static void question48() {
@@ -281,6 +249,110 @@ public static void question48() {
 //==========================================================================================
 public static void question49() {
 	// TODO 
+}
+//==========================================================================================
+public static void question410() {
+//	Question 10:
+//	Kiểm tra 2 chuỗi có là đảo ngược của nhau hay không. Nếu có xuất ra “OK” ngược lại “KO”.
+//	Ví dụ “word” và “drow” là 2 chuỗi đảo ngược nhau.
+//	similar to check if a string is Palindrome
+	Scanner scanner = new Scanner(System.in);
+	System.out.print("Please enter first string here: ");
+	String s1 = scanner.nextLine();
+	System.out.print("Please enter second string here: ");
+	String s2 = scanner.nextLine();
+	
+	boolean isReversed = true;
+	
+	if (s1.length() == s2.length()) {
+		for (int i = 0; i < s1.length(); i++) {
+			if (s1.charAt(i) != s2.charAt(s2.length()-i-1)) {
+				isReversed = false;
+				break;
+			}
+		}
+	}
+	
+	if (isReversed == true) {
+		System.out.println("OK");
+	} else {
+		System.out.println("KO");
+	}
+}
+//==========================================================================================
+public static void question415() {
+	Scanner scanner = new Scanner(System.in);
+	System.out.print("Please enter string here: ");
+	String s = scanner.nextLine();
+	
+	//	remove space at the beginning and the end, multiple spacing
+	s = wordsRefinement(s);
+	
+	String[] split = s.split("\\s");
+	String temp = "";
+
+	for (int i = split.length - 1; i >= 0; i--) {
+		temp += split[i] + " ";
+	}
+System.out.println(temp);
+}
+//==========================================================================================
+public static void question567() { // sửa lại dùng compareTo ingore case
+//	Question 6: Khởi tạo 1 array phòng ban gồm 5 phòng ban, sau đó in ra danh
+//	sách phòng ban theo thứ tự tăng dần theo tên (sắp xếp theo vần ABCD)
+//	VD:
+//	Accounting
+//	Boss of director
+//	Marketing
+//	Sale
+//	Waiting room
+
+	Department department1 = new Department();
+	department1.id = 10;
+	department1.name = "Accounting";
+	
+	Department department2 = new Department();
+	department2.id = 2;
+	department2.name = "Sale";
+	
+	Department department3 = new Department();
+	department3.id = 3;
+	department3.name = "Marketing";
+	
+	Department department4 = new Department();
+	department4.id = 4;
+	department4.name = "Waiting room";
+	
+	Department department5 = new Department();
+	department5.id = 5;
+	department5.name = "Boss of director";
+
+//	List<Department> departments = new ArrayList<>();
+//	departments.add(department1);
+//	departments.add(department2);
+//	departments.add(department3);
+//	departments.add(department4);
+//	departments.add(department5);
+	
+	Department[] departments = {department1, department2, department3, department4, department5};
+	
+	Collections.sort(Arrays.asList(departments));
+	
+	for (Department department : departments) {
+		System.out.println(department);
+	}
+	
+//	this part serve question57()
+//	Question 7: Khởi tạo 1 array học sinh gồm 5 Phòng ban, sau đó in ra danh
+//	sách phòng ban được sắp xếp theo tên
+//	VD:
+//	Accounting
+//	Boss of (d)irector
+//	Marketing
+//	waiting (r)oom
+//	Sale
+//	READ ME: to use this function, toggle on/off comparator at Department class (there are 2 comparator definition for question56 and question57
+//	the syntax in this method remained the same
 }
 //==========================================================================================
 }
