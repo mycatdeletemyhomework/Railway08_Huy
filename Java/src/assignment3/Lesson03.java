@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class Lesson03 {
 public static void main(String[] args) {
-question415();
+question55();
 }
 		
 //==========================================================================================
@@ -297,7 +297,26 @@ public static void question415() {
 System.out.println(temp);
 }
 //==========================================================================================
-public static void question567() { // sửa lại dùng compareTo ingore case
+public static void question55() {
+//	Question 5: So sánh 2 phòng ban thứ 1 và phòng ban thứ 2 xem có bằng nhau
+//	không (bằng nhau khi tên của 2 phòng ban đó bằng nhau)
+	
+	Department department1 = new Department();
+	department1.id = 1;
+	department1.name = "Accounting";
+	
+	Department department2 = new Department();
+	department2.id = 2;
+	department2.name = "accounting";
+	
+	if (department1.equals(department2)) {
+		System.out.println("Equal!");
+	} else {
+		System.out.println("Not equal!");
+	}
+}
+//==========================================================================================
+public static void question567() {
 //	Question 6: Khởi tạo 1 array phòng ban gồm 5 phòng ban, sau đó in ra danh
 //	sách phòng ban theo thứ tự tăng dần theo tên (sắp xếp theo vần ABCD)
 //	VD:
@@ -307,6 +326,7 @@ public static void question567() { // sửa lại dùng compareTo ingore case
 //	Sale
 //	Waiting room
 
+	//	input
 	Department department1 = new Department();
 	department1.id = 10;
 	department1.name = "Accounting";
@@ -327,17 +347,13 @@ public static void question567() { // sửa lại dùng compareTo ingore case
 	department5.id = 5;
 	department5.name = "Boss of director";
 
-//	List<Department> departments = new ArrayList<>();
-//	departments.add(department1);
-//	departments.add(department2);
-//	departments.add(department3);
-//	departments.add(department4);
-//	departments.add(department5);
-	
+	//	put Department objects into arrays
 	Department[] departments = {department1, department2, department3, department4, department5};
 	
+	//	sort function
 	Collections.sort(Arrays.asList(departments));
 	
+	//	printout after sorted
 	for (Department department : departments) {
 		System.out.println(department);
 	}
