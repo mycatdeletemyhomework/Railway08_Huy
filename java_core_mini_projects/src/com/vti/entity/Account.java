@@ -1,29 +1,31 @@
-package assignment1;
+package com.vti.entity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Account {
 	private short id;
-	public String email;
+	private String email;
 	public String userName;
-	public String fullName;
-	public Department department;
-	public Position position;
-	public Date createDate;
-	public Group[] groups;
+	private String fullName;
+	private Department department;
+	private Position position;
+	private Date createDate;
+	private Group[] groups;
 
 //==========================================================================================
-//	this added prior to Lesson 4 - exercise 1 - question 2
+//	create constructors
 
-//Question 2:
-//Tạo constructor cho Account:
-
-//a) Không có parameters
+//	with no parameter
 	public Account() {
 	}
 
-//b) Có các parameter là id, Email, Username, FirstName, LastName (với FullName = FirstName + LastName)
+//	with Username
+	public Account(String userName) {
+		this.userName = userName;
+	}
+	
+//	parameters: id, Email, Username, FirstName, LastName (FullName = FirstName + LastName)
 	public Account(short id, String email, String userName, String firstName, String lastName) {
 		this.id = id;
 		this.email = email;
@@ -31,7 +33,7 @@ public class Account {
 		this.fullName = firstName + " " + lastName;
 	}
 
-//c) Có các parameter là id, Email, Username, FirstName, LastName (với FullName = FirstName + LastName) và Position của User, default createDate = now
+//	parameters: id, Email, Username, FirstName, LastName (FullName = FirstName + LastName), Position, default createDate = now
 	public Account(short id, String email, String userName, String firstName, String lastName, Position position) {
 		this.id = id;
 		this.email = email;
@@ -41,7 +43,7 @@ public class Account {
 		this.createDate = new Date();
 	}
 
-//d) Có các parameter là id, Email, Username, FirstName, LastName (với FullName = FirstName + LastName) và Position của User, createDate
+//	parameters: id, Email, Username, FirstName, LastName (với FullName = FirstName + LastName), Position, createDate
 	public Account(short id, String email, String userName, String firstName, String lastName, Position position,
 			Date createDate) {
 		this.id = id;
@@ -59,12 +61,4 @@ public class Account {
 				+ (position != null ? position.name : "|Position is null|") + " " + createDate;
 	}
 //==========================================================================================
-	public short getId() {
-		return id;
-	}
-//==========================================================================================	
-//	Create a constructor with user name only - for assignment 4 - ex1 - question3c
-	public Account(String userName) {
-		this.userName = userName;
-	}
 }

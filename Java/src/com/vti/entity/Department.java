@@ -1,10 +1,10 @@
-package assignment1;
+package com.vti.entity;
 
 public class Department implements Comparable<Department> {
-	public short id;
-	public String name;
-	public Account[] members;
-
+	private short id;
+	private String name;
+	private Account[] members;
+	
 //==========================================================================================
 //	this added prior to Lesson 3 - exercise 5 - question 5
 	@Override
@@ -12,15 +12,15 @@ public class Department implements Comparable<Department> {
 		if (obj == null) {
 			return false;
 		}
-
-		// datatype casting: Object obj > Department other
+		
+		//	datatype casting: Object obj > Department other
 		Department other = (Department) obj;
-
-		// equal logic
+		
+		//	equal logic
 		if (name.equalsIgnoreCase(other.name)) {
 			return true;
-		}
-		return false;
+		} 
+			return false;
 	}
 
 //==========================================================================================
@@ -34,8 +34,8 @@ public class Department implements Comparable<Department> {
 			return -1;
 		} else if (name.compareToIgnoreCase(other.name) > 0) {
 			return 1;
-		}
-		return 0;
+		} 
+			return 0;
 	}
 
 //==========================================================================================	
@@ -62,24 +62,24 @@ public class Department implements Comparable<Department> {
 //		} 
 //			return 0;
 //	}
-
+	
 //==========================================================================================
 	@Override
 	public String toString() {
-		return "ID: " + id + " " + name;
+		return name;
 	}
-
+	
 //==========================================================================================
 //	this added prior to Lesson 4 - exercise 1 - question 1
 //	Question 1:
 //	Tạo constructor cho department:
-
+	
 //	a) không có parameters
 	public Department() {
 	}
-
+	
 //	b) Có 1 parameter là nameDepartment và default id của Department = 0;
-	public Department(String name) {
+	 public Department(String name) {
 		this.id = 0;
 		this.name = name;
 	}

@@ -1,9 +1,9 @@
-package assignment1;
+package com.vti.entity;
 
 public class Department implements Comparable<Department> {
-	public short id;
-	public String name;
-	public Account[] members;
+	private short id;
+	private String name;
+	private Account[] members;
 
 //==========================================================================================
 //	this added prior to Lesson 3 - exercise 5 - question 5
